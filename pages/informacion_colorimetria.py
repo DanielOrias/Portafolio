@@ -12,4 +12,5 @@ with open("pages/InformacionColorimetria.pdf", "rb") as f:
     )
 #-------------
 if st.button("⬅ Volver al Inicio"):
-    st.link_button("Volver al inicio", "https://poratafoliodanielorias.streamlit.app/")
+     st.switch_page("Portafolio.py")
+
