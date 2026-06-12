@@ -16,6 +16,15 @@ st.container(height=30, border=False)
 
 
 st.subheader("**Proyecto:** :green[Color spectral matching]")
+col_imagen, col_espacio = st.columns([1, 4])
+
+with col_imagen:
+    # 2. Pegamos aquí el enlace directo que nos dio Firebase Storage
+    st.image(
+        "https://i.postimg.cc/SsJ0M77q/Chat-GPT-Image-12-jun-2026-04-13-31-a-m.png", 
+        use_container_width=True
+    )
+
 if st.button("Información del proyecto"):
     st.switch_page("pages/informacion_colorimetria.py")
 
