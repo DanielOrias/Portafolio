@@ -16,7 +16,7 @@ st.container(height=30, border=False)
 
 
 st.subheader("**Proyecto:** :green[Color spectral matching]")
-col_imagen, col_espacio = st.columns([1, 4])
+col_imagen, col_espacio = st.columns([1, 3])
 
 with col_imagen:
     # 2. Pegamos aquí el enlace directo que nos dio Firebase Storage
