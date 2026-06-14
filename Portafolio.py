@@ -25,7 +25,7 @@ with col_imagen:
         use_container_width=True
     )
 
-if st.button("Desarrollo Matemático", type="primary"):
+if st.button("**:black[Desarrollo Matemático]**", type="primary"):
     st.switch_page("pages/informacion_colorimetria.py")
 
 
