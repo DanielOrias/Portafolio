@@ -25,7 +25,7 @@ with col_imagen:
         use_container_width=True
     )
 
-if st.button("Información del proyecto"):
+if st.button("Desarrollo Matemático"):
     st.switch_page("pages/informacion_colorimetria.py")
 
 
