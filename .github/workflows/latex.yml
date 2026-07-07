@@ -21,14 +21,14 @@ jobs:
       - name: Compilar LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: pages/InformacionColorimetria.tex
+          root_file: Portafolio/pages/InformacionColorimetria.tex
 
       - name: Commit del PDF
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          git add pages/InformacionColorimetria.pdf
+          git add Portafolio/pages/InformacionColorimetria.pdf
 
           git diff --cached --quiet || (
             git commit -m "Actualizar PDF automáticamente"
