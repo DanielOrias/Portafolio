@@ -1,4 +1,6 @@
 \documentclass{article}
+
+% --- Paquetes solicitados ---
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-tabla]{babel}
@@ -10,74 +12,58 @@
 \usepackage{enumitem}
 \usepackage{microtype}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.45em}
-\setlist[itemize]{leftmargin=*, itemsep=0.2em, topsep=0.2em}
-\renewcommand{\arraystretch}{1.12}
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\emergencystretch=2em
+% --- Información del documento ---
+\title{Documento de Prueba de Paquetes LaTeX}
+\author{Prueba de Configuración}
+\date{\today}
 
 \begin{document}
 
-\section*{FASE 1 – PLANTILLA COLORIMÉTRICA INVARIANTE DEL SUJETO}
+\maketitle
 
-\subsection*{1. DATOS PRELIMINARES (SIN MODIFICAR)}
+\section{Introducción}
+Este documento sirve para verificar que los paquetes solicitados carguen correctamente y funcionen sin conflictos. A continuación, se muestra una demostración práctica de las capacidades de cada uno.
 
-\subsubsection*{1.1 Conjunto A (cámara trasera, condiciones controladas, WB conocido)}
-\begin{itemize}
-    \item \textbf{Dispositivo:} iPhone 15, lente trasera.
-    \item \textbf{Iluminación:} luz natural difusa; día lluvioso; ventana única.
-    \item \textbf{Entorno:} azulejos café cercanos (posible rebote cálido).
-    \item \textbf{Referencia de blanco:} papel blanco no calibrado.
-    \item \textbf{Multiplicadores de balance de blancos proporcionados por la cámara:} \\
-    \( WB_R = 1.117,\quad WB_G = 1.140,\quad WB_B = 1.178 \)
-\end{itemize}
+\section{Demostración de Paquetes}
 
-\noindent \textbf{Muestras (valores Lab originales, sin corregir):}
-\begin{table}[htbp]
-\centering
-\begin{tabular}{lccc}
-\toprule
-\textbf{Zona} & \textbf{L*} & \textbf{a*} & \textbf{b*} \\
-\midrule
-A\_Frente & 63.3 & 17.5 & 16.6 \\
-A\_Mejilla & 66.8 & 12.6 & 7.6 \\
-A\_Antebrazo & 73.2 & 15.4 & 21.9 \\
-A\_Cuello & 74.2 & 13.8 & 16.0 \\
-\bottomrule
-\end{tabular}
+\subsection{Texto y Tipografía (\texttt{babel}, \texttt{fontenc}, \texttt{inputenc}, \texttt{microtype})}
+Gracias a \texttt{babel} con la opción \texttt{es-tabla}, las construcciones automáticas del lenguaje se adaptan al español (por ejemplo, la fecha de hoy o el nombre de las secciones). Además, podemos escribir eñes (ñ), acentos (á, é, í, ó, ú) y signos de apertura ($\text{¿, ¡}$) directamente en el código fuente. El paquete \texttt{microtype} mejora sutilmente el espaciado y la justificación de este párrafo para evitar saltos de línea extraños.
+
+\subsection{Matemáticas Avanzadas (\texttt{amsmath}, \texttt{amssymb})}
+El paquete \texttt{amsmath} permite estructurar ecuaciones complejas, mientras que \texttt{amssymb} proporciona símbolos matemáticos adicionales como los conjuntos numéricos $\mathbb{R}$, $\mathbb{Z}$ o $\mathbb{N}$.
+
+Una ecuación alineada de prueba:
+\begin{align}
+    f(x) &= \int_{a}^{b} g(x) \, dx \\
+    \sum_{i=1}^{n} i &= \frac{n(n+1)}{2}
+\end{align}
+
+\subsection{Tablas Estilizadas (\texttt{booktabs}, \texttt{array})}
+El paquete \texttt{booktabs} elimina las líneas verticales innecesarias y genera tablas de aspecto profesional usando comandos como \texttt{\textbackslash toprule}, \texttt{\textbackslash midrule} y \texttt{\textbackslash bottomrule}. El paquete \texttt{array} mejora el formato de las celdas.
+
+\begin{table}[h]
+    \centering
+    \caption{Ejemplo de tabla profesional (comprobar que dice ``Tabla'' y no ``Cuadro'').}
+    \vspace{0.3cm}
+    \begin{tabular}{p{3cm} m{4cm} c}
+        \toprule
+        \textbf{Paquete} & \textbf{Función Principal} & \textbf{Estado} \\
+        \midrule
+        \texttt{geometry} & Control de márgenes (2.4 cm) & Operativo \\
+        \texttt{booktabs} & Líneas de calidad editorial & Operativo \\
+        \texttt{enumitem} & Personalización de listas & Operativo \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:ejemplo}
 \end{table}
 
-\noindent \textbf{Promedio recalculado del conjunto A (referencia de control):} \\
-\( L^* = 69.4,\quad a^* = 14.8,\quad b^* = 15.5 \)
+\subsection{Listas Personalizadas (\texttt{enumitem})}
+Con \texttt{enumitem} podemos modificar el espaciado y el tipo de viñeta de las listas fácilmente mediante opciones en corchetes.
 
-\subsubsection*{1.2 Conjunto B (cámara frontal, condiciones no controladas, sin WB)}
-\begin{itemize}
-    \item \textbf{Dispositivo:} iPhone 15, lente frontal.
-    \item \textbf{Iluminación:} luz natural indirecta; 15:50 h; Costa Rica.
-    \item \textbf{Referencia de blanco:} varias no calibradas.
-    \item \textbf{Balance de blancos:} automático; multiplicadores desconocidos.
+\begin{itemize}[label=$\rightarrow$, noitemsep]
+    \item Primer elemento con flecha matemática.
+    \item Segundo elemento con espacio reducido.
+    \item Tercer elemento de prueba.
 \end{itemize}
-
-\noindent \textbf{Muestras (valores HEX de piel):}
-\begin{table}[htbp]
-\centering
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Zona} & \textbf{HEX} & \textbf{L* (sRGB, D65)} & \textbf{a*} & \textbf{b*} \\
-\midrule
-B\_Face1 & \#C59C85 & 67.53 & 11.96 & 17.86 \\
-B\_Face2 & \#CA9A84 & 67.53 & 14.90 & 18.49 \\
-B\_Face3 & \#C7997B & 66.79 & 13.16 & 22.40 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\noindent \textit{(Conversión HEX \(\rightarrow\) sRGB lineal \(\rightarrow\) XYZ (D65) \(\rightarrow\) Lab (D65) según CIE 1976)}
-
-\newpage
-
-\subsection*{2. Esto es una prueba)}
-Esto es una prueba
 
 \end{document}
