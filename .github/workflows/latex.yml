@@ -3,7 +3,6 @@ name: Compilar LaTeX
 on:
   push:
     paths:
-      - "pages/**.tex"
       - "pages/**"
       - ".github/workflows/latex.yml"
 
@@ -23,14 +22,51 @@ jobs:
         with:
           root_file: pages/InformacionColorimetria.tex
 
+      - name: Diagnóstico
+        run: |
+          set -x
+
+          echo "=============================="
+          echo "DIRECTORIO ACTUAL"
+          pwd
+
+          echo "=============================="
+          echo "LISTADO COMPLETO"
+          ls -R
+
+          echo "=============================="
+          echo "PDF ENCONTRADOS"
+          find . -name "*.pdf"
+
+          echo "=============================="
+          echo "ESTADO DE GIT ANTES"
+          git status
+
       - name: Commit del PDF
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          set -x
+
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          if [ -f "pages/InformacionColorimetria.pdf" ]; then
+            echo "PDF encontrado en pages/"
+          elif [ -f "InformacionColorimetria.pdf" ]; then
+            echo "PDF encontrado en la raíz"
+            mv InformacionColorimetria.pdf pages/InformacionColorimetria.pdf
+          else
+            echo "ERROR: No se encontró ningún PDF generado."
+            exit 1
+          fi
 
           git add pages/InformacionColorimetria.pdf
 
-          git diff --cached --quiet || (
+          echo "=============================="
+          git status
+
+          if git diff --cached --quiet; then
+            echo "No hay cambios para subir."
+          else
             git commit -m "Actualizar PDF automáticamente"
-            git push
-          )
+            git push origin HEAD
+          fi
