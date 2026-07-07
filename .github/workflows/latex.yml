@@ -22,51 +22,42 @@ jobs:
         with:
           root_file: pages/InformacionColorimetria.tex
 
-      - name: Diagnóstico
+      - name: Preparar PDF
         run: |
+          set -e
           set -x
 
-          echo "=============================="
-          echo "DIRECTORIO ACTUAL"
+          echo "=== Directorio actual ==="
           pwd
 
-          echo "=============================="
-          echo "LISTADO COMPLETO"
-          ls -R
-
-          echo "=============================="
-          echo "PDF ENCONTRADOS"
+          echo "=== PDFs encontrados ==="
           find . -name "*.pdf"
 
-          echo "=============================="
-          echo "ESTADO DE GIT ANTES"
-          git status
+          if [ -f "./InformacionColorimetria.pdf" ]; then
+            echo "Moviendo PDF generado a pages/"
+            mv -f ./InformacionColorimetria.pdf ./pages/InformacionColorimetria.pdf
+          fi
+
+          echo "=== Estado final ==="
+          ls -l .
+          ls -l ./pages
 
       - name: Commit del PDF
         run: |
+          set -e
           set -x
 
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          if [ -f "pages/InformacionColorimetria.pdf" ]; then
-            echo "PDF encontrado en pages/"
-          elif [ -f "InformacionColorimetria.pdf" ]; then
-            echo "PDF encontrado en la raíz"
-            mv InformacionColorimetria.pdf pages/InformacionColorimetria.pdf
-          else
-            echo "ERROR: No se encontró ningún PDF generado."
-            exit 1
-          fi
-
           git add pages/InformacionColorimetria.pdf
 
-          echo "=============================="
           git status
 
           if git diff --cached --quiet; then
-            echo "No hay cambios para subir."
-          else
-            git commit -m "Actualizar PDF automáticamente"
-            git push origin HEAD
+            echo "No hay cambios para confirmar."
+            exit 0
           fi
+
+          git commit -m "Actualizar PDF automáticamente"
+          git push
