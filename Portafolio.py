@@ -29,6 +29,6 @@ if st.button("**Desarrollo Matemático**", type="primary"):
     st.switch_page("pages/informacion_colorimetria.py")
 
 
-st.link_button("**:blue[Código del proyecto]**", "https://github.com/DanielOrias/Color_spectral_matching")
+st.link_button("**:red[Código del proyecto]**", "https://github.com/DanielOrias/Color_spectral_matching")
 
 st.link_button("Demo del proyecto", "https://github.com")
